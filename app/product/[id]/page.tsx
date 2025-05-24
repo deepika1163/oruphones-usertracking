@@ -85,3 +85,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     </main>
   );
 }
+export async function generateStaticParams() {
+  return [
+    { id: 'iphone15' },
+    { id: 'samsung22' },
+    { id: 'oneplus11' },
+    { id: 'oppo' }
+  ];
+}
