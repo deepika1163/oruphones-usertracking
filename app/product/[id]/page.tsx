@@ -2,7 +2,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Image from 'next/image';
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
   // Dummy product data based on ID
   const productData: { [key: string]: any } = {
     iphone15: {
