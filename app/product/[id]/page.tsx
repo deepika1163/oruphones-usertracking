@@ -384,7 +384,7 @@ export async function generateStaticParams() {
 
 // app/product/[id]/page.tsx
 
-import Header from '../../components/header';
+/*import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -432,6 +432,62 @@ export default function ProductPage({ params }: PageProps) {
 }
 
 // ✅ Keep this as a regular function with no types manually declared
+export async function generateStaticParams() {
+  return [
+    { id: 'iphone15' },
+    { id: 'samsung22' }
+  ];
+}
+*/
+
+// ✅ Do NOT import any `PageProps` from anywhere
+import Header from '../../components/header';
+import Footer from '../../components/footer';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export default function ProductPage({ params }: Props) {
+  const productData: Record<string, any> = {
+    iphone15: {
+      name: "Apple iPhone 15",
+      price: "₹45,000",
+      image: "https://picsum.photos/500",
+      seller: "John Doe",
+      location: "Jones Grove",
+      phone: "9876543210"
+    },
+    samsung22: {
+      name: "Samsung S22",
+      price: "₹40,000",
+      image: "https://picsum.photos/600",
+      seller: "Jane Smith",
+      location: "Newtown",
+      phone: "9123456789"
+    }
+  };
+
+  const product = productData[params.id];
+
+  if (!product) return notFound();
+
+  return (
+    <main>
+      <Header />
+      <h1>{product.name}</h1>
+      <Image src={product.image} alt={product.name} width={400} height={400} />
+      <p>{product.price}</p>
+      <Footer />
+    </main>
+  );
+}
+
+// ✅ `generateStaticParams` should not have any types manually added
 export async function generateStaticParams() {
   return [
     { id: 'iphone15' },
