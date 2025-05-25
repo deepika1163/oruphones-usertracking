@@ -97,7 +97,7 @@ export async function generateStaticParams() {
 
 // app/product/[id]/page.tsx
 
-import Header from '../../components/header';
+/*import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Image from 'next/image';
 type PageProps = {
@@ -147,6 +147,71 @@ export default function ProductPage({ params }: PageProps) {
 }
 
 // ✅ Required for dynamic routing in static export
+export async function generateStaticParams() {
+  return [
+    { id: 'iphone15' },
+    { id: 'samsung22' }
+  ];
+}
+*/
+
+
+// app/product/[id]/page.tsx
+
+import Header from '../../components/header';
+import Footer from '../../components/footer';
+import Image from 'next/image';
+import { Metadata } from 'next';
+
+// ✅ This is the correct way to define the `Page` props in App Router
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+// ✅ This is your page component with correctly typed props
+export default function Page({ params }: Props) {
+  const productData: Record<string, any> = {
+    iphone15: {
+      name: "Apple iPhone 15",
+      price: "₹45,000",
+      image: "https://picsum.photos/500",
+      seller: "John Doe",
+      location: "Jones Grove",
+      phone: "9876543210"
+    },
+    samsung22: {
+      name: "Samsung S22",
+      price: "₹40,000",
+      image: "https://picsum.photos/600",
+      seller: "Jane Smith",
+      location: "Newtown",
+      phone: "9123456789"
+    }
+  };
+
+  const product = productData[params.id] || {
+    name: "Unknown",
+    price: "N/A",
+    image: "https://picsum.photos/400",
+    seller: "N/A",
+    location: "N/A",
+    phone: "N/A"
+  };
+
+  return (
+    <main>
+      <Header />
+      <h1>{product.name}</h1>
+      <Image src={product.image} alt={product.name} width={400} height={400} />
+      <p>{product.price}</p>
+      <Footer />
+    </main>
+  );
+}
+
+// ✅ This is the correct way to declare static params for dynamic routes
 export async function generateStaticParams() {
   return [
     { id: 'iphone15' },
