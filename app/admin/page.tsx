@@ -17,7 +17,7 @@ export default function AdminPage() {
   const [data, setData] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ /* useEffect(() => {
     axios.get('https://oruphones-usertracking-backend.onrender.com/api/track')
 
       .then((res) => {
@@ -28,7 +28,21 @@ export default function AdminPage() {
         console.error('Error fetching tracking data:', err);
         setLoading(false);
       });
-  }, []);
+  }, []);*/
+  
+  useEffect(() => {
+  axios.get('https://oruphones-usertracking-backend.onrender.com/api/track')
+    .then((res) => {
+      console.log("📦 Data received:", res.data); // ✅ Add this line
+      setData(res.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error('❌ Error fetching tracking data:', err);
+      setLoading(false);
+    });
+}, []);
+
 
   return (
     <main className="p-4 space-y-6">
