@@ -19,6 +19,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     axios.get('https://oruphones-usertracking-backend.onrender.com/api/track')
+
       .then((res) => {
         setData(res.data);
         setLoading(false);
