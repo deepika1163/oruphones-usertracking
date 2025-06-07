@@ -33,6 +33,37 @@ export default function HomePage() {
   useEffect(() => {
   const startTime = Date.now();
 
+  const handleUnload = () => {
+    const endTime = Date.now();
+    const timeSpent = Math.floor((endTime - startTime) / 1000);
+    const scrollDepth = window.scrollY;
+
+    const trackingData = {
+      page: 'Homepage',
+      timeSpent,
+      scrollDepth,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString(),
+    };
+
+    trackUser(trackingData);
+  };
+
+  // ✅ Works on desktop and mobile reliably
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      handleUnload();
+    }
+  });
+
+  return () => {
+    handleUnload();
+  };
+}, []);
+
+ /* useEffect(() => {
+  const startTime = Date.now();
+
   const handleBeforeUnload = () => {
     const endTime = Date.now();
     const timeSpent = Math.floor((endTime - startTime) / 1000); // in seconds
@@ -56,7 +87,7 @@ export default function HomePage() {
     window.removeEventListener('beforeunload', handleBeforeUnload);
     handleBeforeUnload();
   };
-}, []);
+}, []);*/
 
   return (
     <main className="p-4 space-y-8">
