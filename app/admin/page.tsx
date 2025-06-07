@@ -38,6 +38,11 @@ export default function AdminPage() {
       {loading ? (
         <p>Loading...</p>
       ) : (
+        <>
+        <p className="text-sm text-blue-600">Data Length: {data.length}</p>
+<p className="text-sm text-blue-600">Loading: {loading ? 'Yes' : 'No'}</p>
+<p className="text-sm text-blue-600">First Page Name: {data[0]?.page || 'No data yet'}</p>
+
         <table className="table-auto w-full border">
           <thead>
             <tr className="bg-green-400">
@@ -60,6 +65,7 @@ export default function AdminPage() {
             ))}
           </tbody>
         </table>
+        </>
       )}
 
       <Footer />
