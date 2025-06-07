@@ -18,7 +18,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/track')
+    axios.get('https://oruphones-usertracking-backend.onrender.com/api/track')
       .then((res) => {
         setData(res.data);
         setLoading(false);
