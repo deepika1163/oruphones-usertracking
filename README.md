@@ -77,7 +77,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## 📦 Tech Stack
 
 - **Frontend:** Next.js + TypeScript + Tailwind CSS
-- **Backend API:** Node.js + Express + MongoDB Atlas
+- **Backend API:** Node.js + TypeScript + MongoDB Atlas
 - **Database:** MongoDB Atlas
 - **Deployment:**
   - Frontend: Vercel
@@ -107,3 +107,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 cd client
 npm install
 npm run dev
+The result will run at: http://localhost:3000
