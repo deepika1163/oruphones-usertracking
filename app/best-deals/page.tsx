@@ -71,7 +71,7 @@ function ProductCard({ name, price }: { name: string; price: string }) {
   );
 }
 
-export default function BestDealsPage() {
+/*export default function BestDealsPage() {
   useEffect(() => {
     const startTime = Date.now();
 
@@ -97,7 +97,35 @@ export default function BestDealsPage() {
       handleBeforeUnload();
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  }, []);*/
+  export default function BestDeals() {
+  useEffect(() => {
+  const startTime = Date.now();
+
+  const handleBeforeUnload = () => {
+    const endTime = Date.now();
+    const timeSpent = Math.floor((endTime - startTime) / 1000); // in seconds
+    const scrollDepth = window.scrollY;
+
+    const trackingData = {
+      page: 'BestDealspage',
+      timeSpent,
+      scrollDepth,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString(),
+    };
+
+    trackUser(trackingData);
+  };
+
+  // Send data when user leaves
+  window.addEventListener('beforeunload', handleBeforeUnload);
+
+  return () => {
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+    handleBeforeUnload();
+  };
+}, []);
 
   return (
     <main className="p-4">
